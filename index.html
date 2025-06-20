@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Show's Bar Lounge</title>
+
+  <!-- Aqui eu conectei os scripts do Firebase e do JS principal -->
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="main.js" defer></script>
+
+  <!-- Estilo todo embutido aqui mesmo, só pra ficar mais fácil de visualizar -->
+  <style>
+    /* Zerando margem e definindo a fonte padrão */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+
+    /* Estilo da navbar que fica no topo da página */
+    .navbar {
+      background-color: #20232a;
+      padding: 15px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    /* Links do menu */
+    .navbar nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .navbar nav a:hover {
+      color: #61dafb; /* Fica azul quando passa o mouse */
+    }
+
+    /* Seção principal (hero) com imagem e texto chamativo */
+    .hero {
+      background: url('hero.jpg') center/cover no-repeat;
+      padding: 100px 40px;
+      color: white;
+      text-align: center;
+      background-color: #111; /* Caso a imagem não carregue */
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 20px;
+    }
+
+    /* Estilo geral das seções */
+    section {
+      padding: 60px 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    /* Títulos das seções */
+    h2 {
+      font-size: 28px;
+      color: #20232a;
+      margin-bottom: 20px;
+    }
+
+    /* Lista dos serviços */
+    #services ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #services li {
+      background-color: #fff;
+      margin-bottom: 10px;
+      padding: 15px;
+      border-left: 6px solid #61dafb;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* sombra levinha */
+    }
+
+    /* Imagens do portfólio */
+    #portfolio img {
+      width: 48%;
+      margin: 1%;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Formulário dos depoimentos */
+    #testimonials form {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #testimonials input,
+    #testimonials textarea {
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    #testimonials button {
+      background-color: #61dafb;
+      border: none;
+      padding: 10px;
+      color: #000;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #testimonials button:hover {
+      background-color: #21a1f1;
+    }
+
+    /* Estilo dos depoimentos que aparecem na tela */
+    #testimonials-list div {
+      background: #fff;
+      padding: 15px;
+      margin-top: 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Infos de contato */
+    #contact p {
+      font-size: 18px;
+      margin: 8px 0;
+    }
+
+    /* Rodapé simples no final da página */
+    footer {
+      background-color: #20232a;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* Responsivo pro celular */
+    @media (max-width: 768px) {
+      #portfolio img {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .navbar nav a {
+        display: block;
+        margin: 10px 0;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu de navegação lá no topo -->
+  <header class="navbar">
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#services">Serviços</a>
+      <a href="#portfolio">Portfólio</a>
+      <a href="#testimonials">Depoimentos</a>
+      <a href="#contact">Contato</a>
+    </nav>
+  </header>
+
+  <!-- Seção principal de boas-vindas -->
+  <section id="home" class="hero">
+    <h1>Show's Bar Lounge</h1>
+    <p>Excelência em eventos corporativos</p>
+  </section>
+
+  <!-- Seção que mostra os serviços que a empresa oferece -->
+  <section id="services">
+    <h2>Serviços</h2>
+    <ul>
+      <li>Eventos Corporativos personalizados</li>
+      <li>Buffet e Coquetéis sofisticados</li>
+      <li>Locação de Espaço Lounge com estrutura moderna</li>
+    </ul>
+  </section>
+
+  <!-- Aqui vai as fotos dos eventos anteriores -->
+  <section id="portfolio">
+    <h2>Portfólio</h2>
+    <img src="img/evento1.png" alt="Evento 1">
+    <img src="img/evento2.png" alt="Evento 2">
+  </section>
+
+  <!-- Depoimentos dos clientes com formulário pra mandar também -->
+  <section id="testimonials">
+    <h2>Depoimentos</h2>
+    <div id="testimonials-list"></div>
+    <form id="testimonial-form">
+      <input type="text" id="name" placeholder="Nome" required>
+      <textarea id="message" placeholder="Mensagem" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <!-- Contato fake, só pra preencher mesmo rs -->
+  <section id="contact">
+    <h2>Contato</h2>
+    <p>Email: contato@showsbar.com</p>
+    <p>Telefone: (46) 99999-9999</p>
+  </section>
+
+  <!-- Rodapé com os direitos -->
+  <footer>
+    <p>&copy; 2025 Show's Bar Lounge. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>
