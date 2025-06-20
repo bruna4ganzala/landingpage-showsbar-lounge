@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Administração - Show's Bar</title>
+
+  <!-- Aqui puxei o CSS geral (caso esteja em um arquivo separado) -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Conectando o Firebase e o script dessa página de admin -->
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="admin.js" defer></script>
+
+  <!-- Estilos direto no HTML mesmo, só pra facilitar o teste rápido -->
+  <style>
+    /* Corpo da página com fundo clarinho e fonte bonita */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    /* Cabeçalho da página com fundo escuro e texto branco */
+    header {
+      background-color: #20232a;
+      color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    /* Link pra voltar pra página principal */
+    header a {
+      color: #61dafb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Seção principal onde vão aparecer os depoimentos */
+    section {
+      padding: 30px 40px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #20232a;
+    }
+
+    /* Lista dos depoimentos (sem os pontinhos padrão da UL) */
+    ul#admin-testimonials-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    /* Cada item da lista de depoimentos */
+    ul#admin-testimonials-list li {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-left: 6px solid #61dafb; /* Barrinha azul do lado pra destacar */
+      border-radius: 6px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Nome da pessoa que enviou o depoimento */
+    ul#admin-testimonials-list li strong {
+      display: block;
+      font-size: 16px;
+      color: #111;
+    }
+
+    /* Botão pra excluir o depoimento */
+    ul#admin-testimonials-list li button {
+      background-color: #e74c3c;
+      border: none;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    /* Deixa o botão mais escuro quando passa o mouse por cima */
+    ul#admin-testimonials-list li button:hover {
+      background-color: #c0392b;
+    }
+
+    /* Responsividade pra celular (deixa bonitinho em tela pequena) */
+    @media (max-width: 600px) {
+      header, section {
+        padding: 20px;
+      }
+
+      /* Empilha os elementos quando for celular */
+      ul#admin-testimonials-list li {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      /* Botão ocupa toda a largura no celular */
+      ul#admin-testimonials-list li button {
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabeçalho com o nome da página e link pra voltar -->
+  <header>
+    <h1>Administração de Depoimentos</h1>
+    <a href="index.html">← Voltar</a>
+  </header>
+
+  <!-- Aqui vai a lista dos depoimentos puxados do Firebase -->
+  <section id="admin-testimonials">
+    <h2>Lista de Depoimentos</h2>
+    <ul id="admin-testimonials-list">
+      <!-- Depoimentos aparecem aqui automaticamente com o JS -->
+    </ul>
+  </section>
+
+</body>
+</html>
